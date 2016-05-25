@@ -234,7 +234,7 @@ E/Fragment#1: onResume
 
 在Fragment中，还有一个setUserVisibleHint(boolean isVisibleToUser)的回调，页面的显隐就是通过改回调通知Fragment的。isVisibleToUser为true时显示、为false是隐藏。
 
-从日志中我们可以看出，缓存数量内的Fragment0和Fragment1的isVisibleToUser首先会被设置成false，然后分别进行onAttach() - onResume()的生命周期，其中需要显示的Fragment在onCreate()之后，会将isVisibleToUser置为true，然后显示出来。
+从日志中我们可以看出，缓存数量内的Fragment0和Fragment1的isVisibleToUser首先会被设置成false，然后分别进行onAttach() - onResume()的生命周期，其中需要显示的Fragment在onCreate()之后，会将isVisibleToUser置为true，然后显示出来。由此可见setUserVisibleHint()有可能在onAttach()之前调用，并且到显示前可能调用2此，开发时需注意。
 
 再之后的显隐就是设置isVisibleToUser并回调通知了。和上文中的onHiddenChanged()一样，显隐状态没有变化时，也是不会回调的。
 
