@@ -242,15 +242,19 @@ E/Fragment#1: onResume
 // 从0切换到1
 E/Fragment#0: setUserVisibleHint isVisibleToUser = false
 E/Fragment#1: setUserVisibleHint isVisibleToUser = true
+
 // 从1切换到0
 E/Fragment#1: setUserVisibleHint isVisibleToUser = false
 E/Fragment#0: setUserVisibleHint isVisibleToUser = true
+
 // 从0切换到1
 E/Fragment#0: setUserVisibleHint isVisibleToUser = false
 E/Fragment#1: setUserVisibleHint isVisibleToUser = true
+
 // 从1切换到0
 E/Fragment#1: setUserVisibleHint isVisibleToUser = false
 E/Fragment#0: setUserVisibleHint isVisibleToUser = true
+
 // 从1切换到2
 E/Fragment#0: setUserVisibleHint isVisibleToUser = false
 E/Fragment#2: setUserVisibleHint isVisibleToUser = true
