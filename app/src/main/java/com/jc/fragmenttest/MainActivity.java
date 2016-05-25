@@ -3,6 +3,8 @@ package com.jc.fragmenttest;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private PlaceholderFragment0 fragment0;
+    private PlaceholderFragment1 fragment1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +42,48 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        addFragment();
+
+        addFragment2ViewPager();
+
+    }
+
+    /**
+     * test normal FragmentTransaction manager
+     */
+    private void addFragment() {
+
+        fragment0 = PlaceholderFragment0.newInstance(0);
+        fragment1 = PlaceholderFragment1.newInstance(1);
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .add(R.id.container_frame, fragment0, "0")
+                .add(R.id.container_frame, fragment1, "1")
+                .detach(fragment1)
+                .commit();
+    }
+
+    public void onFrag0Click(View view) {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .detach(fragment0)
+                .attach(fragment1)
+                .commit();
+    }
+
+    /**
+     * test FragmentPagerAdapter manager
+     */
+    private void addFragment2ViewPager() {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -56,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
     }
 
 
@@ -81,6 +121,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

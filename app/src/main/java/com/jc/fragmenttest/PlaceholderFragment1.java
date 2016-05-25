@@ -20,7 +20,7 @@ import android.widget.TextView;
  * A placeholder fragment containing a simple view.
  */
 public class PlaceholderFragment1 extends Fragment {
-    private static final String TAG = "Fragment111111";
+    private static final String TAG = "Fragment#1";
 
     /**
      * The fragment argument representing the section number for this
@@ -109,13 +109,13 @@ public class PlaceholderFragment1 extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        Log.e(TAG, "onHiddenChanged");
+        Log.e(TAG, "onHiddenChanged hidden = " + hidden);
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "setUserVisibleHint = " + isVisibleToUser);
+        Log.e(TAG, "setUserVisibleHint isVisibleToUser = " + isVisibleToUser);
     }
 
     @Override
