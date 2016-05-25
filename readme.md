@@ -232,7 +232,7 @@ E/Fragment#1: onStart
 E/Fragment#1: onResume
 ```
 
-在Fragment中，还有一个setUserVisibleHint(boolean isVisibleToUser)的回调，ViewPager管理的显隐就是通过改回调通知Fragment的。isVisibleToUser为true时显示、为false是隐藏。
+在Fragment中，还有一个setUserVisibleHint(boolean isVisibleToUser)的回调，页面的显隐就是通过改回调通知Fragment的。isVisibleToUser为true时显示、为false是隐藏。
 
 从日志中我们可以看出，缓存数量内的Fragment0和Fragment1的isVisibleToUser首先会被设置成false，然后分别进行onAttach() - onResume()的生命周期，其中需要显示的Fragment在onCreate()之后，会将isVisibleToUser置为true，然后显示出来。
 
