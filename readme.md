@@ -2,7 +2,8 @@
 
 本Demo用于测试Fragment在不同管理方式下的生命周期。
 
-## FragmentTransaction管理下的生命周期
+
+### FragmentTransaction管理下的生命周期
 
 在Android中，对Fragment的操作都是通过FragmentTransaction来执行。而从Fragment的结果来看，FragmentTransaction中对Fragment的操作大致可以分为两类：
 
@@ -11,7 +12,7 @@
 
 对于每一组方法，虽然最后产生的效果类似，但方法背后带来的副作用以及对Fragment的生命周期的影响都不尽相同。
 
-### add() vs replace()
+#### add() vs replace()
 
 只有在Fragment数量大于等于2的时候，调用add()还是replace()的区别才能体现出来。当通过add()连续两次添加Fragment的时候，每个Fragment生命周期中的onAttach()-onResume()都会被各调用一次，而且两个Fragment的View会被同时attach到containerView。
 
@@ -76,7 +77,7 @@ E/Fragment#1: onStart
 E/Fragment#1: onResume
 ```
 
-### show() & hide() vs. attach() & detach()
+#### show() & hide() vs. attach() & detach()
 
 调用show() & hide()方法时，Fragment的正常生命周期方法并不会被执行，仅仅是Fragment的View被显示或者​隐藏，并视情况调用onHiddenChanged()。而且，尽管Fragment的View被隐藏，但它在父布局中并未被detach，仍然是作为containerView的childView存在着。
 
@@ -108,7 +109,7 @@ E/Fragment#0: onStart
 E/Fragment#0: onResume
 ```
 
-### remove()
+#### remove()
 相对应add()方法执行onAttach()-onResume()的生命周期，remove()就是完成剩下的onPause()-onDetach()周期。而且replace()其实就是remove()+add()。
 
 ```
@@ -119,7 +120,7 @@ E/Fragment#0: onDestroy
 E/Fragment#0: onDetach
 ```
 
-### 状态保存
+#### 状态保存
 前面的log中有一个onViewStateRestored()的生命周期，是用来恢复保存的状态的。它对应的保存回调是onSaveInstanceState()，此回调会在app<b>进入后台</b> 、<b>熄屏</b>和 <b>其他系统认为需要保存状态</b>的情况下调用
 
 ```
@@ -129,9 +130,9 @@ E/Fragment#1: onSaveInstanceState
 E/Fragment#1: onStop
 ```
 
-## PagerAdapter管理下的生命周期
+### PagerAdapter管理下的生命周期
 
-### FragmentPagerAdapter
+#### FragmentPagerAdapter
 
 FragmentPagerAdapter实际上是使用add()，attach()和detach()来管理Fragment的，所以影响的基本生命周期和上文中相关说明是一致的。缓冲范围内的从onAttach() - onResume()，超出缓存范围onPause() - onDestroyView()。
 
@@ -172,7 +173,7 @@ public void destroyItem(ViewGroup container, int position, Object object) {
 }
 ```
 
-### FragmentStatePagerAdapter
+#### FragmentStatePagerAdapter
 
 由源码可知，FragmentStatePagerAdapter使用add()和remove()管理Fragment，所以缓存外的Fragment的实例不会保存在内存中，适合分页多，数据动态的情况。
 
@@ -202,7 +203,7 @@ public void destroyItem(ViewGroup container, int position, Object object) {
 }
 ```
 
-### 显示和隐藏
+#### 显示和隐藏
 
 实际开发中，缓存数量外的Fragment会被detach或remove，我们可以根据其常规生命周期，但是缓存数量内的显隐并不会影响生命周期，那我们怎么知道某个Fragment是否显示了呢？
 
@@ -255,6 +256,6 @@ E/Fragment#2: setUserVisibleHint isVisibleToUser = true
 
 ---
 
-#### 引用
+##### 引用
 
 - 第一节引用自[FragmentTransaction与Fragment生命周期的关系](https://segmentfault.com/a/1190000000650573)
