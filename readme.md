@@ -132,6 +132,8 @@ E/Fragment#1: onStop
 
 ### PagerAdapter管理下的生命周期
 
+目前一般使用FragmentPagerAdapter和FragmentStatePagerAdapter来配合ViewPager、TabLayout实现Fragment管理。
+
 #### FragmentPagerAdapter
 
 FragmentPagerAdapter实际上是使用add()，attach()和detach()来管理Fragment的，所以影响的基本生命周期和上文中相关说明是一致的。缓冲范围内的从onAttach() - onResume()，超出缓存范围onPause() - onDestroyView()。
